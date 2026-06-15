@@ -30,7 +30,7 @@ router.get("/keep-alive", async (req, res) => {
     let dbPing = "skipped";
     if (mongoose.connection.readyState === 1) {
       // Perform a ping command to keep MongoDB connection active
-      await mongoose.connection.db.admin().ping();
+      await mongoose.connection.db.command({ ping: 1 });
       dbPing = "success";
     } else {
       throw new Error("Database connection is not ready");
